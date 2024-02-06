@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public User findUserByEmail(String email) throws Throwable {
-        return (User) userRepo.findUserByEmail(email).orElseThrow(() -> new UserNotFoundException("User by id " + email + " was not found"));
+        return (User) userRepo.findUserByEmail(email).orElseThrow(() -> new UserNotFoundException("User by email " + email + " was not found"));
     }
 
 
