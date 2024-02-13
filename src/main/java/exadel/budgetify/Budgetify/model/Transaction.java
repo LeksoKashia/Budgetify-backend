@@ -2,6 +2,7 @@ package exadel.budgetify.Budgetify.model;
 
 
 import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,9 +15,11 @@ public class Transaction {
     private Long id;
 
     private String type;
+
     private String title;
 
     private String categories;
+
     private float amount;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -24,19 +27,21 @@ public class Transaction {
     private Date paymentDate;
 
     private String payee;
-    private String description;
 
-    private String images;
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
 
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
+    private List<Images> images = new ArrayList<>();
+
     public Transaction() {
     }
 
     public Transaction(String type, String title, String categories, float amount, Date paymentDate,
-                       String payee, String description, String images, Account account) {
+                       String payee, String description, Account account) {
         this.type = type;
         this.title = title;
         this.categories = categories;
@@ -44,7 +49,6 @@ public class Transaction {
         this.paymentDate = paymentDate;
         this.payee = payee;
         this.description = description;
-        this.images = images;
         this.account = account;
     }
 
@@ -113,20 +117,20 @@ public class Transaction {
         this.description = description;
     }
 
-    public String getImages() {
-        return images;
-    }
-
-    public void setImages(String images) {
-        this.images = images;
-    }
-
     public Account getAccount() {
         return account;
     }
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public List<Images> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Images> images) {
+        this.images = images;
     }
 }
 

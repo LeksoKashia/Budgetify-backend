@@ -11,6 +11,7 @@ public class Obligatory {
     private Long id;
 
     private String title;
+
     private float amount;
 
     @Temporal(TemporalType.TIMESTAMP)

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 @Entity
 public class Account {
 
@@ -17,7 +18,9 @@ public class Account {
     private User user;
 
     private float balance;
+
     private String currency;
+
     private String description;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -32,6 +35,9 @@ public class Account {
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Obligatory> obligatories = new ArrayList<>();
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<PiggyBank> piggyBanks = new ArrayList<>();
 
     public Account() {
 
@@ -115,4 +121,14 @@ public class Account {
     public void setObligatories(List<Obligatory> obligatories) {
         this.obligatories = obligatories;
     }
+
+    public List<PiggyBank> getPiggyBanks() {
+        return piggyBanks;
+    }
+
+    public void setPiggyBanks(List<PiggyBank> piggyBanks) {
+        this.piggyBanks = piggyBanks;
+    }
+
+
 }
