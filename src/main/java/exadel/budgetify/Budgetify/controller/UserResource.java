@@ -30,4 +30,10 @@ public class UserResource {
         User newUser = userService.addUser(User);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
