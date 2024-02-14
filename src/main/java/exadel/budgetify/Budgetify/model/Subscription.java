@@ -44,7 +44,6 @@ public class Subscription {
         this.account = account;
     }
 
-
     public Long getId() {
         return id;
     }
