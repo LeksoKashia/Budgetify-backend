@@ -17,15 +17,20 @@ public class Account {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private String title;
+
     private float balance;
 
     private String currency;
 
     private String description;
 
+
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "payment_date", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date paymentDate;
+    private Date paymentDate = new Date();
+
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Transaction> transactions = new ArrayList<>();
@@ -43,13 +48,13 @@ public class Account {
 
     }
 
-    public Account(User user, float balance, String currency, String description) {
+    public Account(User user, float balance, String currency, String description, String title) {
         this.user = user;
         this.balance = balance;
         this.currency = currency;
         this.description = description;
+        this.title = title;
     }
-
     public Long getId() {
         return id;
     }
@@ -65,6 +70,15 @@ public class Account {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
 
     public float getBalance() {
         return balance;
