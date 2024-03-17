@@ -3,30 +3,28 @@ import jakarta.persistence.*;
 
 
 @Entity
-public class Images {
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fileType;
+    private String filePath;
 
     private String fileName;
 
-    @Lob
-    private byte[] data;
 
     @ManyToOne
     @JoinColumn(name = "transaction_id")
     private Transaction transaction;
 
-    public Images() {
+    public Image() {
     }
 
-    public Images(String fileType, String fileName, byte[] data) {
-        this.fileType = fileType;
+    public Image( String filePath, String fileName, Transaction transaction) {
+        this.filePath = filePath;
         this.fileName = fileName;
-        this.data = data;
+        this.transaction = transaction;
     }
 
     public Long getId() {
@@ -37,13 +35,6 @@ public class Images {
         this.id = id;
     }
 
-    public String getFileType() {
-        return fileType;
-    }
-
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
-    }
 
     public String getFileName() {
         return fileName;
@@ -53,12 +44,12 @@ public class Images {
         this.fileName = fileName;
     }
 
-    public byte[] getData() {
-        return data;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void setData(byte[] data) {
-        this.data = data;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     public Transaction getTransaction() {

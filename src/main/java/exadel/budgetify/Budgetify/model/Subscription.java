@@ -40,7 +40,7 @@ public class Subscription {
         this.amount = amount;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.description = description;
+         this.description = description;
         this.account = account;
     }
 

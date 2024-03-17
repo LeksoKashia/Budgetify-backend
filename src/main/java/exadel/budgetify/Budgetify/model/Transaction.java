@@ -1,6 +1,7 @@
 package exadel.budgetify.Budgetify.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -34,8 +35,9 @@ public class Transaction {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
-    private List<Images> images = new ArrayList<>();
+    private List<Image> images = new ArrayList<>();
 
     public Transaction() {
     }
@@ -124,11 +126,11 @@ public class Transaction {
         this.account = account;
     }
 
-    public List<Images> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Images> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 }

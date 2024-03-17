@@ -1,5 +1,6 @@
 package exadel.budgetify.Budgetify.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,22 +26,24 @@ public class Account {
 
     private String description;
 
-
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "payment_date", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date paymentDate = new Date();
 
 
+    @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Transaction> transactions = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Subscription> subscriptions = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Obligatory> obligatories = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<PiggyBank> piggyBanks = new ArrayList<>();
 
