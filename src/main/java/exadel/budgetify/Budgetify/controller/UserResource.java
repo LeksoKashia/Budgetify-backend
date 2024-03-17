@@ -1,5 +1,6 @@
 package exadel.budgetify.Budgetify.controller;
 
+import exadel.budgetify.Budgetify.model.Account;
 import exadel.budgetify.Budgetify.model.User;
 import exadel.budgetify.Budgetify.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,6 @@ public class UserResource {
         this.userService = userService;
     }
 
-
     @GetMapping("/find/{email}")
     public ResponseEntity<User> getUser(@PathVariable("email") String email) throws Throwable {
         User User = userService.findUserByEmail(email);
@@ -35,5 +35,11 @@ public class UserResource {
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/accounts/{userId}")
+    public ResponseEntity<List<Account>> getUserAccounts(@PathVariable("userId") Long userId) {
+        List<Account> accounts = userService.getUserAccounts(userId);
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 }
