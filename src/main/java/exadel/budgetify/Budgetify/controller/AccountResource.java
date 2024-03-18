@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/payment")
-public class PaymentResource {
+@RequestMapping("/account")
+public class AccountResource {
 
     private final AccountService accountService;
 
-    public PaymentResource(AccountService accountService) {
+    public AccountResource(AccountService accountService) {
         this.accountService = accountService;
     }
 
