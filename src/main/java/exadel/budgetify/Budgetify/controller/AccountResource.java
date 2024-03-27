@@ -43,13 +43,17 @@ public class AccountResource {
         return new ResponseEntity<>(obligatories, HttpStatus.OK);
     }
 
+    @GetMapping("/accounts/categories/{accountId}")
+    public ResponseEntity<List<Category>> getAccountCategories(@PathVariable("accountId") Long accountId) {
+        List<Category> categories = accountService.getAccountCategories(accountId);
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<Account>> getAllAccounts() {
         List<Account> accounts = accountService.findAllAccounts();
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
-
 
     @PostMapping("/add")
     public ResponseEntity<Account> addAccount(@RequestBody Account Account) {
@@ -63,13 +67,10 @@ public class AccountResource {
         return new ResponseEntity<>(updateAccount, HttpStatus.OK);
     }
 
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteAccount(@PathVariable("id") Long id) {
         accountService.deleteAccount(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
     
 }

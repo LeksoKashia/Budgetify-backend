@@ -47,6 +47,11 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<PiggyBank> piggyBanks = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Category> categories = new ArrayList<>();
+
+
     public Account() {
 
     }
@@ -145,6 +150,14 @@ public class Account {
 
     public void setPiggyBanks(List<PiggyBank> piggyBanks) {
         this.piggyBanks = piggyBanks;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
 

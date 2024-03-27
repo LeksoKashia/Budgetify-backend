@@ -54,6 +54,16 @@ public class AccountService {
         }
     }
 
+    public List<Category> getAccountCategories(Long accountId) {
+        Optional<Account> optionalAccount = accountRepo.findById(accountId);
+        if (optionalAccount.isPresent()) {
+            Account account = optionalAccount.get();
+            return account.getCategories();
+        } else {
+            throw new UserNotFoundException("Account not found with id: " + accountId);
+        }
+    }
+
     @Autowired
     public AccountService(AccountRepo accountRepo) {
         this.accountRepo = accountRepo;
