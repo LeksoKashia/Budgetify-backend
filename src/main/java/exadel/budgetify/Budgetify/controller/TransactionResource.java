@@ -1,7 +1,9 @@
 package exadel.budgetify.Budgetify.controller;
 
 
+import exadel.budgetify.Budgetify.model.Image;
 import exadel.budgetify.Budgetify.model.Transaction;
+import exadel.budgetify.Budgetify.model.TransactionCategories;
 import exadel.budgetify.Budgetify.service.TransactionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,18 @@ public class TransactionResource {
 
     public TransactionResource(TransactionService transactionService) {
         this.transactionService = transactionService;
+    }
+
+    @GetMapping("/categories/{transationId}")
+    public ResponseEntity<List<TransactionCategories>> getAccountTransactions(@PathVariable("transationId") Long transationId) {
+        List<TransactionCategories> transactionsCategories = transactionService.getTransactionCategories(transationId);
+        return new ResponseEntity<>(transactionsCategories, HttpStatus.OK);
+    }
+
+    @GetMapping("/images/{transationId}")
+    public ResponseEntity<List<Image>> getImages(@PathVariable("transationId") Long transationId) {
+        List<Image> images = transactionService.getImages(transationId);
+        return new ResponseEntity<>(images, HttpStatus.OK);
     }
 
     @PostMapping("/add")

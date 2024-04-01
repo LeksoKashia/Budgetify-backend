@@ -1,6 +1,5 @@
 package exadel.budgetify.Budgetify.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -18,8 +17,6 @@ public class Transaction {
     private String type;
 
     private String title;
-
-    private String categories;
 
     private float amount;
 
@@ -39,14 +36,17 @@ public class Transaction {
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
+    private List<TransactionCategories> transactionCategories = new ArrayList<>();
+
     public Transaction() {
     }
 
-    public Transaction(String type, String title, String categories, float amount, Date paymentDate,
+    public Transaction(String type, String title,float amount, Date paymentDate,
                        String payee, String description, Account account) {
         this.type = type;
         this.title = title;
-        this.categories = categories;
         this.amount = amount;
         this.paymentDate = paymentDate;
         this.payee = payee;
@@ -76,14 +76,6 @@ public class Transaction {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getCategories() {
-        return categories;
-    }
-
-    public void setCategories(String categories) {
-        this.categories = categories;
     }
 
     public float getAmount() {
@@ -133,5 +125,12 @@ public class Transaction {
     public void setImages(List<Image> images) {
         this.images = images;
     }
-}
 
+    public List<TransactionCategories> getTransactionCategories() {
+        return transactionCategories;
+    }
+
+    public void setTransactionCategories(List<TransactionCategories> transactionCategories) {
+        this.transactionCategories = transactionCategories;
+    }
+}
